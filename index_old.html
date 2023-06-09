@@ -1,0 +1,152 @@
+<html lang="en">
+
+<head>
+	<meta name="description" content="Webpage description goes here" />
+	<meta charset="utf-8">
+	<title>Resizer</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="author" content="">
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,1000&display=swap"
+		rel="stylesheet">
+
+</head>
+
+<body>
+	<style>
+		body {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background-color: rgb(32, 32, 32);
+			margin: 0px;
+			min-height: 100vh;
+		}
+
+		/* div {
+			display: flex;
+			color: white;
+			box-sizing: border-box;
+			padding: 20px;
+			border-radius: 200px;
+			flex-direction: column;
+			align-items: center;
+			align-content: center;
+		}
+
+		div button {
+			font-family: 'Nunito', sans-serif;
+			background: transparent;
+			color: white;
+			border: 2px solid white;
+			border-radius: 200px;
+			box-sizing: border-box;
+			padding: 5px;
+			font-size: 20px;
+			margin-top: 20px;
+			transition: all ease-in-out 0.2s;
+			min-width: 150px;
+		}
+
+		div button:hover {
+			color: rgb(62, 216, 255);
+			border: 2px solid rgb(62, 216, 255);
+		} */
+
+		.list {
+			display: flex;
+			flex-direction: column;
+			gap: 20px;
+			align-items: center;
+			align-content: center;
+			margin: 0px 20px;
+		}
+
+		.list-item {
+			display: flex;
+			flex-direction: row;
+			gap: 20px;
+		}
+
+		h1 {
+			font-family: 'Nunito', sans-serif;
+			color: white;
+			margin: 0;
+			font-size: 50px;
+		}
+
+		h3 {
+			font-family: 'Nunito', sans-serif;
+			color: white;
+			margin: 0;
+			font-size: 20px;
+			font-weight: 500;
+		}
+
+		.route {
+			background: transparent;
+			color: inherit;
+			font-weight: 800;
+
+		}
+
+
+		@media only screen and (max-width: 600px) {
+			.list-item {
+				flex-direction: column;
+				align-items: center;
+			}
+
+			h1 {
+				font-size: 25px;
+			}
+
+			h3 {
+				font-size: 15px;
+			}
+		}
+	</style>
+
+	<div class="list">
+		<h1>Methods</h1>
+		<div class="list" style="align-items: flex-start; margin: 0;">
+			<div class="list-item">
+				<h3><mark class="route">GET</mark></h3>
+				<h3>@location/{ string
+					or url to
+					encode }</h3>
+			</div>
+			<div class="list-item">
+				<h3><mark class="route">GET</mark></h3>
+				<h3>@location/{ size }/{ string
+					or url to
+					encode }</h3>
+			</div>
+			<div class="list-item">
+				<h3><mark class="route">GET</mark></h3>
+				<h3>@location/{ size }/{ background color in hex }/{ string
+					or url to
+					encode }</h3>
+			</div>
+			<div class="list-item">
+				<h3><mark class="route">GET</mark></h3>
+				<h3>@location/{ size }/{ background color in hex }/{ forground
+					color
+					in hex }/{ string
+					or url to encode }</h3>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		Array.from(document.querySelectorAll('div h3')).forEach(e => {
+			e.innerHTML = e.innerHTML.replace('@location', window.location.origin)
+		})
+		console.log(window.location.origin)
+	</script>
+</body>
+
+</html>

@@ -1,152 +1,263 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-	<meta name="description" content="Webpage description goes here" />
-	<meta charset="utf-8">
-	<title>Resizer</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="author" content="">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- displays site properly based on user's device -->
 
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link
-		href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,1000&display=swap"
-		rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
 
+    <title>QR Generator</title>
+
+    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+    <style>
+        .attribution {
+            font-size: 11px;
+            text-align: center;
+        }
+
+        .attribution a {
+            color: hsl(228, 45%, 44%);
+        }
+    </style>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap');
+
+        body {
+            --color-body-bg: hsl(217, 54%, 11%);
+            --color-card-bg: hsl(216, 50%, 16%);
+            --color-card-preview-overlay: #2222226c;
+            --width-card: 325px;
+            --br-card: 10px;
+            --br-image: 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            background-color: var(--color-body-bg);
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .content {
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        .card {
+            --content-width: 87%;
+            display: flex;
+            flex-direction: column;
+            max-width: var(--width-card);
+            background-color: var(--color-card-bg);
+            border-radius: var(--br-card);
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        .card-preview {
+            display: flex;
+            width: var(--content-width);
+            overflow: hidden;
+            margin: 6.5% 0;
+            border-radius: var(--br-image);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .card-preview #qr {
+            width: 100%;
+            aspect-ratio: 1;
+        }
+
+        .card-preview-overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            background-color: var(--color-card-preview-overlay);
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all ease-in-out 0.2s;
+        }
+
+        .card-preview:hover .card-preview-overlay {
+            opacity: 1;
+        }
+
+        .icon {
+            width: 80px;
+            height: 80px;
+        }
+
+        .card-info {
+            display: flex;
+            flex-direction: column;
+            width: var(--content-width);
+            gap: 20px;
+        }
+
+        .card-info-item {
+            display: flex;
+            width: 100%;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        label {
+            color: white;
+            font-family: 'Outfit', sans-serif;
+            font-size: 10px;
+            text-align: center;
+        }
+
+        input {
+            --input-border: white;
+            display: flex;
+            text-align: center;
+            width: 100%;
+            margin: 0px;
+            border: 2px solid var(--input-border);
+            box-sizing: border-box;
+            height: 30px;
+            border-radius: var(--br-card);
+            padding: 0px 10px;
+        }
+
+        input[type="color"] {
+            padding: 0px;
+            block-size: 30px;
+            border: none;
+            /* background-color: transparent; */
+        }
+
+        input[type="color"]::-webkit-color-swatch-wrapper {
+            padding: 0;
+        }
+
+        input[type="color"]::-webkit-color-swatch {
+            border: 2px solid var(--input-border);
+            border-radius: var(--br-card);
+            cursor: pointer;
+        }
+
+        button {
+            margin: 6.5% calc(6.5% * 2);
+            width: var(--content-width);
+            height: 40px;
+            border-radius: var(--br-card);
+            border: none;
+            background-color: white;
+        }
+    </style>
 </head>
 
 <body>
-	<style>
-		body {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			background-color: rgb(32, 32, 32);
-			margin: 0px;
-			min-height: 100vh;
-		}
-
-		/* div {
-			display: flex;
-			color: white;
-			box-sizing: border-box;
-			padding: 20px;
-			border-radius: 200px;
-			flex-direction: column;
-			align-items: center;
-			align-content: center;
-		}
-
-		div button {
-			font-family: 'Nunito', sans-serif;
-			background: transparent;
-			color: white;
-			border: 2px solid white;
-			border-radius: 200px;
-			box-sizing: border-box;
-			padding: 5px;
-			font-size: 20px;
-			margin-top: 20px;
-			transition: all ease-in-out 0.2s;
-			min-width: 150px;
-		}
-
-		div button:hover {
-			color: rgb(62, 216, 255);
-			border: 2px solid rgb(62, 216, 255);
-		} */
-
-		.list {
-			display: flex;
-			flex-direction: column;
-			gap: 20px;
-			align-items: center;
-			align-content: center;
-			margin: 0px 20px;
-		}
-
-		.list-item {
-			display: flex;
-			flex-direction: row;
-			gap: 20px;
-		}
-
-		h1 {
-			font-family: 'Nunito', sans-serif;
-			color: white;
-			margin: 0;
-			font-size: 50px;
-		}
-
-		h3 {
-			font-family: 'Nunito', sans-serif;
-			color: white;
-			margin: 0;
-			font-size: 20px;
-			font-weight: 500;
-		}
-
-		.route {
-			background: transparent;
-			color: inherit;
-			font-weight: 800;
-
-		}
 
 
-		@media only screen and (max-width: 600px) {
-			.list-item {
-				flex-direction: column;
-				align-items: center;
-			}
+    <div class="content">
+        <div class="card">
+            <div class="card-preview" id="preview">
 
-			h1 {
-				font-size: 25px;
-			}
+                <img id="qr" alt="preview" src="https://qr.oyintare.dev/700/9300FF/FFFFFF/https://9anime.to/home">
+                <!-- <img alt="preview" src="./images/image-equilibrium.jpg"> -->
+                <div class="card-preview-overlay">
+                    <img class="icon" src="./copy.svg" alt="copy">
+                </div>
+            </div>
+            <div class="card-info">
+                <div class="card-info-item">
+                    <label for="url">URL</label>
+                    <input type="text" id="url" />
+                </div>
+                <div class="card-info-item">
+                    <label for="size">Size</label>
+                    <input type="number" id="size" />
+                </div>
+                <div class="card-info-item">
+                    <label for="foreground">Foreground</label>
+                    <input type="color" id="foreground" />
+                </div>
+                <div class="card-info-item">
+                    <label for="background">Background</label>
+                    <input type="color" id="background" />
+                </div>
+            </div>
+            <button id="generate">Generate</button>
+        </div>
+    </div>
 
-			h3 {
-				font-size: 15px;
-			}
-		}
-	</style>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        let fgColor = params.get('fg') || '#000000'
+        let bgColor = params.get('bg') || '#ffffff'
+        let url = params.get('url') || 'https://qr.oyintare.dev/'
+        let size = parseInt(params.get('size') || '500')
 
-	<div class="list">
-		<h1>Methods</h1>
-		<div class="list" style="align-items: flex-start; margin: 0;">
-			<div class="list-item">
-				<h3><mark class="route">GET</mark></h3>
-				<h3>@location/{ string
-					or url to
-					encode }</h3>
-			</div>
-			<div class="list-item">
-				<h3><mark class="route">GET</mark></h3>
-				<h3>@location/{ size }/{ string
-					or url to
-					encode }</h3>
-			</div>
-			<div class="list-item">
-				<h3><mark class="route">GET</mark></h3>
-				<h3>@location/{ size }/{ background color in hex }/{ string
-					or url to
-					encode }</h3>
-			</div>
-			<div class="list-item">
-				<h3><mark class="route">GET</mark></h3>
-				<h3>@location/{ size }/{ background color in hex }/{ forground
-					color
-					in hex }/{ string
-					or url to encode }</h3>
-			</div>
-		</div>
-	</div>
+        const bgElement = document.getElementById('background')
+        const fgElement = document.getElementById('foreground')
+        const urlElement = document.getElementById('url')
+        const sizeElement = document.getElementById('size')
+        const generateElement = document.getElementById('generate')
+        const qrElement = document.getElementById('qr')
 
-	<script>
-		Array.from(document.querySelectorAll('div h3')).forEach(e => {
-			e.innerHTML = e.innerHTML.replace('@location', window.location.origin)
-		})
-		console.log(window.location.origin)
-	</script>
+        document.getElementById("preview").addEventListener('click', (e) => {
+            navigator.clipboard.writeText(qrElement.src)
+        })
+
+        bgElement.value = bgColor;
+        fgElement.value = fgColor;
+        urlElement.value = url;
+        sizeElement.value = size;
+
+        function updateQR() {
+            qrElement.src = `https://qr.oyintare.dev/${size}/${bgColor.slice(1)}/${fgColor.slice(1)
+                }/${url}`
+        }
+
+        bgElement.addEventListener('change', (e) => {
+            bgColor = e.target.value;
+            params.set('bg', bgColor)
+
+            window.history.replaceState(null, null, `?${params.toString()}`)
+        })
+
+        fgElement.addEventListener('change', (e) => {
+            fgColor = e.target.value
+            params.set('fg', fgColor)
+
+            window.history.replaceState(null, null, `?${params.toString()}`)
+        })
+
+        urlElement.addEventListener('change', (e) => {
+            url = e.target.value;
+            params.set('url', url)
+
+            window.history.replaceState(null, null, `?${params.toString()}`)
+        })
+
+        sizeElement.addEventListener('change', (e) => {
+            size = e.target.valueAsNumber;
+            params.set('size', size)
+            console.log(params.toString())
+            window.history.replaceState(null, null, `?${params.toString()}`)
+        })
+
+        generateElement.addEventListener('click', (e) => {
+            console.log("Click Event")
+            updateQR()
+        })
+
+        updateQR()
+
+
+    </script>
 </body>
 
 </html>
