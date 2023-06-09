@@ -5,10 +5,10 @@ import { mapParams, getUrlParams, makeQrCode } from './utils';
 
 const ROUTES = {
 	paramsSizeBgFgUrl:
-		/([0-9]+)\/([a-zA-Z0-9#]+)\/([a-zA-Z0-9#]+)\/(https?:\/\/.*)/,
-	paramsSizeBgUrl: /([0-9]+)\/([a-zA-Z0-9#]+)\/(https?:\/\/.*)/,
-	paramsSizeUrl: /([0-9]+)\/(https?:\/\/.*)/,
-	paramsUrl: /(https?:\/\/.*)/,
+		/\/?([0-9]+)\/([a-zA-Z0-9#]+)\/([a-zA-Z0-9#]+)\/(https?:\/\/?.*)/,
+	paramsSizeBgUrl: /\/?([0-9]+)\/([a-zA-Z0-9#]+)\/(https?:\/\/?.*)/,
+	paramsSizeUrl: /\/?([0-9]+)\/(https?:\/\/?.*)/,
+	paramsUrl: /\/?(https?:\/\/?.*)/,
 };
 
 const app = express();

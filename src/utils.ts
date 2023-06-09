@@ -35,5 +35,7 @@ export function makeQrCode(
 }
 
 export function getUrlParams(req: Request, reg: RegExp) {
-	return Array.from(req.originalUrl.match(reg) ?? []).slice(1);
+	return Array.from(
+		req.originalUrl.replace(':/', '://').match(reg) ?? []
+	).slice(1);
 }
