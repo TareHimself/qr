@@ -1,0 +1,1 @@
+# Simple QR code generator
